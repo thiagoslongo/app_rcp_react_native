@@ -39,7 +39,10 @@ export default function HomeScreen() {
           <Text style={styles.title}>Treinamento RCP</Text>
         </View>
         <View style={styles.botoesContainer}>
-          <TouchableOpacity style={styles.botaoPrimario} onPress={() => {}}>
+          <TouchableOpacity
+            style={styles.botaoPrimario}
+            onPress={() => router.push("/(tabs)/fv-tvsp")}
+          >
             <Text style={styles.textoPrimario}>INICIAR SIMULAÇÃO DE RCP</Text>
           </TouchableOpacity>
 
