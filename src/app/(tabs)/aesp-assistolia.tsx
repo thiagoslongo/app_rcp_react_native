@@ -11,26 +11,35 @@ import {
 } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
-export default function FvTvsp() {
+export default function AespAssistolia() {
   const [dosesEpinefrina, setDosesEpinefrina] = useState(0);
-  const [segundos, setSegundos] = useState(0);
-  const [ativo, setAtivo] = useState(false);
+  const [segundosCronometro, setSegundosCronometro] = useState(0);
+  const [cronometroAtivo, setCronometroAtivo] = useState(false);
+  const [ciclos, setCiclos] = useState(0);
 
   useEffect(() => {
-    let intervalo;
+    let intervalo: ReturnType<typeof setInterval>;
 
-    if (ativo) {
+    if (cronometroAtivo) {
       intervalo = setInterval(() => {
-        setSegundos((valorAnterior) => valorAnterior + 1);
+        setSegundosCronometro((valorAnterior) => {
+          const novoSegundo = valorAnterior + 1;
+
+          if (novoSegundo % 120 === 0) {
+            setCiclos((cicloAnterior) => cicloAnterior + 1);
+          }
+
+          return novoSegundo;
+        });
       }, 1000);
     }
 
     return () => clearInterval(intervalo);
-  }, [ativo]);
+  }, [cronometroAtivo]);
 
-  const formatarTempo = () => {
-    const min = Math.floor(segundos / 60);
-    const seg = segundos % 60;
+  const exibirTempoFormatado = () => {
+    const min = Math.floor(segundosCronometro / 60);
+    const seg = segundosCronometro % 60;
 
     return `${String(min).padStart(2, "0")}:${String(seg).padStart(2, "0")}`;
   };
@@ -39,34 +48,47 @@ export default function FvTvsp() {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["bottom"]}>
         <View style={styles.header}>
-          <Text style={styles.headerText}>FV / TVSP</Text>
-          <Text style={styles.headerText}>00:00</Text>
-          <Text style={styles.headerText}>Ciclos: 0</Text>
-        </View>
-        <View style={styles.cronometroContainer}>
-          <Text style={styles.tempo}>{formatarTempo()}</Text>
-          <TouchableOpacity onPress={() => setAtivo(!ativo)}>
-            <Text>{ativo ? "Pausar" : "Iniciar"}</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => {
-              setAtivo(false);
-              setSegundos(0);
-            }}
-          >
-            <Text>Resetar</Text>
-          </TouchableOpacity>
-        </View>
-        <TouchableOpacity style={styles.cardContainer}>
           <View>
-            <FontAwesome name="heart" size={25} color={"#000000"} />
+            {" "}
+            <MaterialCommunityIcons
+              name="arrow-left-circle"
+              size={25}
+              color={"rgba(255,255,255,0.9)"}
+            >
+              {" "}
+            </MaterialCommunityIcons>{" "}
+          </View>
+          <Text style={styles.headerText}>AESP / ASSISTO...</Text>
+          <Text style={styles.headerText}>{exibirTempoFormatado()}</Text>
+          <Text style={styles.headerText}>Ciclos: {ciclos}</Text>
+        </View>
+        <TouchableOpacity
+          style={styles.cardContainer}
+          onPress={() => {
+            setCronometroAtivo(!cronometroAtivo);
+          }}
+        >
+          <View>
+            <FontAwesome
+              name="heart"
+              size={25}
+              color={cronometroAtivo ? "green" : "#000000"}
+            />
           </View>
           <View>
             <Text style={styles.textoPrincipal}>Compressão Torácia</Text>
             <Text style={styles.descricaoGeral}>
               100 a 120 compressões por minuto
             </Text>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              <Text style={styles.cronometroStyle}>
+                {" "}
+                {exibirTempoFormatado()}
+              </Text>
+              <Text style={styles.ciclosStyele}>Ciclos: {ciclos}</Text>
+            </View>
           </View>
         </TouchableOpacity>
         {/* btn.ventilacoes */}
@@ -164,19 +186,19 @@ const styles = StyleSheet.create({
     color: "rgba(255,255,255,0.9)",
     fontSize: 20,
   },
-  scrollView: {},
   onPressPadrao: {
-    fontSize: 18,
+    fontSize: 20,
     paddingTop: 10,
     fontWeight: "bold",
   },
-  cronometroContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+  cronometroStyle: {
+    paddingTop: 10,
+    fontSize: 20,
+    fontWeight: "bold",
   },
-  tempo: {
-    fontSize: 48,
-    marginBottom: 20,
+  ciclosStyele: {
+    paddingTop: 10,
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });
