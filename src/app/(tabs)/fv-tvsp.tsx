@@ -20,12 +20,12 @@ export default function FvTvsp() {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["bottom"]}>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>FV / TVSP</Text>
+          <Text style={styles.headerText}>00:00</Text>
+          <Text style={styles.headerText}>Ciclos: 0</Text>
+        </View>
         <ScrollView style={styles.scrollView}>
-          <View style={styles.header}>
-            <Text style={styles.headerText}>FV / TVSP</Text>
-            <Text style={styles.headerText}>00:00</Text>
-            <Text style={styles.headerText}>Ciclos: 0</Text>
-          </View>
           <TouchableOpacity style={styles.cardContainer}>
             <View>
               <FontAwesome name="heart" size={25} color={"#000000"} />
@@ -130,7 +130,11 @@ export default function FvTvsp() {
             onPress={() => Alert.alert("Gerando relatório...")}
           >
             <View>
-              <FontAwesome name="file-text" size={25} color={"#000000"} />
+              <MaterialCommunityIcons
+                name="file-document-plus"
+                size={25}
+                color={"#000000"}
+              />
             </View>
             <View>
               <Text style={styles.textoPrincipal}>Relatório</Text>
