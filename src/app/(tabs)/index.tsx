@@ -17,6 +17,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function HomeScreen() {
   const router = useRouter();
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalEscolhaVisible, setModalEscolhaVisible] = useState(false);
   return (
     <ImageBackground
       source={require("../../../assets/images/backgroud-tela-inicial.png")}
@@ -39,9 +40,47 @@ export default function HomeScreen() {
           <Text style={styles.title}>Treinamento RCP</Text>
         </View>
         <View style={styles.botoesContainer}>
-          <TouchableOpacity style={styles.botaoPrimario} onPress={() => {}}>
+          <TouchableOpacity
+            style={styles.botaoPrimario}
+            onPress={() => setModalEscolhaVisible(true)}
+          >
             <Text style={styles.textoPrimario}>INICIAR SIMULAÇÃO DE RCP</Text>
           </TouchableOpacity>
+          <Modal
+            animationType="fade"
+            transparent={true}
+            visible={modalEscolhaVisible}
+            onRequestClose={() => setModalEscolhaVisible(false)}
+          >
+            <View style={styles.modalEscolhaRitmo}>
+              <View style={styles.modalEscolhaContainer}>
+                <Text style={styles.textEscolhaRitmo}>Escolha o Ritmo</Text>
+                <Pressable
+                  style={styles.botaoEscolhaRitmo}
+                  onPress={() => {
+                    setModalEscolhaVisible(false);
+                    router.push("/(tabs)/fv-tvsp");
+                  }}
+                >
+                  <Text style={styles.textBotaoEscolhaRitmo}>FV / TVSP</Text>
+                </Pressable>
+                <Pressable
+                  style={styles.botaoEscolhaRitmo}
+                  onPress={() => {
+                    setModalEscolhaVisible(false);
+                    router.push("/(tabs)/aesp-assistolia");
+                  }}
+                >
+                  <Text style={styles.textBotaoEscolhaRitmo}>
+                    AESP / Assistolia
+                  </Text>
+                </Pressable>
+                <Pressable onPress={() => setModalEscolhaVisible(false)}>
+                  <Text style={styles.textFecharEscolha}>Fechar</Text>
+                </Pressable>
+              </View>
+            </View>
+          </Modal>
 
           <TouchableOpacity
             style={styles.botaoSecundario}
@@ -52,7 +91,7 @@ export default function HomeScreen() {
         </View>
         <Modal
           animationType="slide"
-          transparent={true}
+          transparent={false}
           visible={modalVisible}
           onRequestClose={() => setModalVisible(false)}
         >
@@ -174,5 +213,46 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     fontSize: 14,
     color: "#000",
+  },
+  modalEscolhaRitmo: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.75)",
+    color: "white",
+  },
+  modalEscolhaContainer: {
+    backgroundColor: "#2D2343",
+    borderRadius: 20,
+    padding: 30,
+    width: "80%",
+    alignItems: "center",
+    gap: 12,
+    marginTop: -70,
+  },
+  textFecharEscolha: {
+    textAlign: "center",
+    fontWeight: "bold",
+    color: "#ffffff",
+  },
+  botaoEscolhaRitmo: {
+    backgroundColor: "#ffffffd7",
+    paddingVertical: 10,
+    paddingHorizontal: 60,
+    borderRadius: 20,
+    marginBottom: 10,
+    width: "100%",
+    alignItems: "center",
+  },
+  textBotaoEscolhaRitmo: {
+    color: "#2D2343",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  textEscolhaRitmo: {
+    color: "white",
+    fontSize: 20,
+    marginBottom: 20,
+    fontWeight: "bold",
   },
 });
