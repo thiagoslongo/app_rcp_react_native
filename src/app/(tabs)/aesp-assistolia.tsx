@@ -4,6 +4,8 @@ import { Checkbox } from "expo-checkbox";
 import React, { useEffect, useState } from "react";
 import {
   Alert,
+  Modal,
+  Pressable,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -181,6 +183,7 @@ const InstrucoesARoute = () => {
                 style={styles.checkbox}
                 value={item.marcado}
                 onValueChange={() => alternarItem(item.id)}
+                color={item.marcado ? "green" : undefined}
               />
             )}
             <Text
@@ -281,6 +284,7 @@ const InstrucoesBRoute = () => {
                 style={styles.checkbox}
                 value={item.marcado}
                 onValueChange={() => alternarItem(item.id)}
+                color={item.marcado ? "green" : undefined}
               />
             )}
             <Text
@@ -379,6 +383,7 @@ const InstrucoesCRoute = () => {
                 style={styles.checkbox}
                 value={item.marcado}
                 onValueChange={() => alternarItem(item.id)}
+                color={item.marcado ? "green" : undefined}
               />
             )}
             <Text
@@ -409,6 +414,7 @@ export default function AespAssistolia() {
   const [ciclos, setCiclos] = useState(0);
   const layout = useWindowDimensions();
   const [index, setIndex] = React.useState(0);
+  const [modalCicloVisible, setModalCicloVisible] = useState(false);
 
   useEffect(() => {
     let intervalo: ReturnType<typeof setInterval>;
@@ -420,6 +426,7 @@ export default function AespAssistolia() {
 
           if (novoSegundo % 120 === 0) {
             setCiclos((cicloAnterior) => cicloAnterior + 1);
+            setModalCicloVisible(true);
           }
 
           return novoSegundo;
@@ -494,6 +501,28 @@ export default function AespAssistolia() {
           renderScene={renderScene}
           renderTabBar={renderTabBar}
         />
+        <Modal
+          visible={modalCicloVisible}
+          transparent={true}
+          animationType="fade"
+        >
+          <View style={styles.modalEscolhaRitmo}>
+            <View style={styles.modalEscolhaContainer}>
+              <MaterialCommunityIcons
+                name="alert-circle"
+                size={50}
+                color="#D0BCFF"
+              />
+              <Text style={styles.textEscolhaRitmo}>Ciclo Completo!</Text>
+              <Text style={{ color: "white", textAlign: "center" }}>
+                Considere alternar o socorrista e verificar o ritmo.
+              </Text>
+              <Pressable onPress={() => setModalCicloVisible(false)}>
+                <Text style={styles.textFecharEscolha}>Entendi</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Modal>
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -566,5 +595,34 @@ const styles = StyleSheet.create({
   checkboxTextSemMargem: {
     flex: 1,
     paddingLeft: 40,
+  },
+  modalEscolhaRitmo: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.69)",
+  },
+  modalEscolhaContainer: {
+    backgroundColor: "#2D2343",
+    borderRadius: 20,
+    padding: 30,
+    width: "80%",
+    alignItems: "center",
+    gap: 12,
+  },
+  textEscolhaRitmo: {
+    color: "white",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  textFecharEscolha: {
+    color: "white",
+    fontWeight: "bold",
+    backgroundColor: "#000",
+    borderRadius: 20,
+    paddingHorizontal: 30,
+    paddingVertical: 8,
+    marginTop: 10,
+    overflow: "hidden",
   },
 });
