@@ -49,14 +49,11 @@ export default function AespAssistolia() {
       <SafeAreaView style={styles.container} edges={["bottom"]}>
         <View style={styles.header}>
           <View>
-            {" "}
             <MaterialCommunityIcons
               name="arrow-left-circle"
               size={25}
               color={"rgba(255,255,255,0.9)"}
-            >
-              {" "}
-            </MaterialCommunityIcons>{" "}
+            />
           </View>
           <Text style={styles.headerText}>AESP / ASSISTO...</Text>
           <Text style={styles.headerText}>{exibirTempoFormatado()}</Text>
