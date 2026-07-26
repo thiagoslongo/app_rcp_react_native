@@ -1,13 +1,13 @@
+import CheckboxItem from "@/components/CheckboxItem";
+import Header from "@/components/Header";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { Checkbox } from "expo-checkbox";
 import React, { useEffect, useState } from "react";
 import {
   Alert,
   Modal,
   Pressable,
   ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -177,23 +177,13 @@ const InstrucoesARoute = () => {
         const semCheckbox = idsApenasTexto.includes(item.id);
 
         return (
-          <View key={item.id} style={styles.checkboxContainer}>
-            {!semCheckbox && (
-              <Checkbox
-                style={styles.checkbox}
-                value={item.marcado}
-                onValueChange={() => alternarItem(item.id)}
-                color={item.marcado ? "green" : undefined}
-              />
-            )}
-            <Text
-              style={
-                semCheckbox ? styles.checkboxTextSemMargem : styles.checkboxText
-              }
-            >
-              {item.texto}
-            </Text>
-          </View>
+          <CheckboxItem
+            key={item.id}
+            texto={item.texto}
+            marcado={item.marcado}
+            semCheckbox={semCheckbox}
+            onPress={() => alternarItem(item.id)}
+          />
         );
       })}
     </ScrollView>
@@ -278,23 +268,13 @@ const InstrucoesBRoute = () => {
         const semCheckbox = idsApenasTexto.includes(item.id);
 
         return (
-          <View key={item.id} style={styles.checkboxContainer}>
-            {!semCheckbox && (
-              <Checkbox
-                style={styles.checkbox}
-                value={item.marcado}
-                onValueChange={() => alternarItem(item.id)}
-                color={item.marcado ? "green" : undefined}
-              />
-            )}
-            <Text
-              style={
-                semCheckbox ? styles.checkboxTextSemMargem : styles.checkboxText
-              }
-            >
-              {item.texto}
-            </Text>
-          </View>
+          <CheckboxItem
+            key={item.id}
+            texto={item.texto}
+            marcado={item.marcado}
+            semCheckbox={semCheckbox}
+            onPress={() => alternarItem(item.id)}
+          />
         );
       })}
     </ScrollView>
@@ -377,23 +357,13 @@ const InstrucoesCRoute = () => {
         const semCheckbox = idsApenasTexto.includes(item.id);
 
         return (
-          <View key={item.id} style={styles.checkboxContainer}>
-            {!semCheckbox && (
-              <Checkbox
-                style={styles.checkbox}
-                value={item.marcado}
-                onValueChange={() => alternarItem(item.id)}
-                color={item.marcado ? "green" : undefined}
-              />
-            )}
-            <Text
-              style={
-                semCheckbox ? styles.checkboxTextSemMargem : styles.checkboxText
-              }
-            >
-              {item.texto}
-            </Text>
-          </View>
+          <CheckboxItem
+            key={item.id}
+            texto={item.texto}
+            marcado={item.marcado}
+            semCheckbox={semCheckbox}
+            onPress={() => alternarItem(item.id)}
+          />
         );
       })}
     </ScrollView>
@@ -482,18 +452,11 @@ export default function AespAssistolia() {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["bottom"]}>
-        <View style={styles.header}>
-          <View>
-            <MaterialCommunityIcons
-              name="arrow-left-circle"
-              size={25}
-              color={"rgba(255,255,255,0.9)"}
-            />
-          </View>
-          <Text style={styles.headerText}>AESP / ASSISTO...</Text>
-          <Text style={styles.headerText}>{exibirTempoFormatado()}</Text>
-          <Text style={styles.headerText}>Ciclos: {ciclos}</Text>
-        </View>
+        <Header
+          titulo="AESP / ASSISTO..."
+          tempo={exibirTempoFormatado()}
+          ciclos={ciclos}
+        />
         <TabView
           lazy
           navigationState={{ index, routes }}
@@ -551,19 +514,6 @@ const styles = StyleSheet.create({
     color: "#2D2343",
     fontSize: 15,
   },
-  header: {
-    backgroundColor: "#2D2343",
-    paddingTop: StatusBar.currentHeight || 80,
-    paddingHorizontal: 20,
-    paddingBottom: 16,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  headerText: {
-    color: "rgba(255,255,255,0.9)",
-    fontSize: 20,
-  },
   onPressPadrao: {
     fontSize: 20,
     paddingTop: 10,
@@ -578,23 +528,6 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     fontSize: 20,
     fontWeight: "bold",
-  },
-  checkboxContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  checkbox: {
-    marginHorizontal: 5,
-    marginVertical: 10,
-  },
-  checkboxText: {
-    flex: 1,
-    marginLeft: 10,
-  },
-  checkboxTextSemMargem: {
-    flex: 1,
-    paddingLeft: 40,
   },
   modalEscolhaRitmo: {
     flex: 1,
