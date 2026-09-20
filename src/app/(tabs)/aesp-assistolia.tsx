@@ -1,5 +1,6 @@
-import CheckboxItem from "@/components/CheckboxItem";
+import ChecklistRoute from "@/components/ChecklistRoute";
 import Header from "@/components/Header";
+import { checklistAesp } from "@/data/checklistAesp";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import React, { useEffect, useState } from "react";
@@ -7,7 +8,6 @@ import {
   Alert,
   Modal,
   Pressable,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -42,7 +42,7 @@ const AcoesRoute = ({
         />
       </View>
       <View>
-        <Text style={styles.textoPrincipal}>Compressão Torácia</Text>
+        <Text style={styles.textoPrincipal}>Compressão Torácica</Text>
         <Text style={styles.descricaoGeral}>
           100 a 120 compressões por minuto
         </Text>
@@ -100,275 +100,6 @@ const AcoesRoute = ({
     </TouchableOpacity>
   </View>
 );
-
-const InstrucoesARoute = () => {
-  const [itens, setItens] = useState([
-    {
-      id: 1,
-      texto: "Verificar o pulso por 10s: pulso carotídeo ou femoral",
-      marcado: false,
-    },
-    {
-      id: 2,
-      texto: "Chamar ajuda e iniciar imediatamente a RCP",
-      marcado: false,
-    },
-    {
-      id: 3,
-      texto: "Iniciar compressões: 30 compressões para 2 ventilações",
-      marcado: false,
-    },
-    {
-      id: 4,
-      texto: "Iniciar compressões no terço inferior do esterno",
-      marcado: false,
-    },
-    {
-      id: 5,
-      texto: "As compressões deprimem o tórax em 5cm",
-      marcado: false,
-    },
-    {
-      id: 6,
-      texto: "As compressões permitem retorno do tórax P",
-      marcado: false,
-    },
-    {
-      id: 7,
-      texto: "Delegar para pegar o carro de emergência",
-      marcado: false,
-    },
-    {
-      id: 8,
-      texto: "Monitorar paciente com as pás do desfibrilador",
-      marcado: false,
-    },
-    {
-      id: 9,
-      texto: "Observar monitor. Se linha reta: assistolia",
-      marcado: false,
-    },
-    {
-      id: 10,
-      texto: "Retomar compressões",
-      marcado: false,
-    },
-    {
-      id: 11,
-      texto:
-        "Ciclos de 30 compressões para 2 ventilações com bolsa, válvula, máscara.",
-      marcado: false,
-    },
-  ]);
-
-  const idsApenasTexto = [4, 5, 6, 11];
-
-  const alternarItem = (id: number) => {
-    setItens((itensAtuais) =>
-      itensAtuais.map((item) =>
-        item.id === id ? { ...item, marcado: !item.marcado } : item,
-      ),
-    );
-  };
-
-  return (
-    <ScrollView style={{ flex: 1, padding: 16 }}>
-      {itens.map((item) => {
-        const semCheckbox = idsApenasTexto.includes(item.id);
-
-        return (
-          <CheckboxItem
-            key={item.id}
-            texto={item.texto}
-            marcado={item.marcado}
-            semCheckbox={semCheckbox}
-            onPress={() => alternarItem(item.id)}
-          />
-        );
-      })}
-    </ScrollView>
-  );
-};
-
-const InstrucoesBRoute = () => {
-  const [itens, setItens] = useState([
-    {
-      id: 1,
-      texto: "Ligar fonte de oxigênio a 15 l/min",
-      marcado: false,
-    },
-    {
-      id: 2,
-      texto: "Verificar se reservatório de oxigênio está enchendo",
-      marcado: false,
-    },
-    {
-      id: 3,
-      texto: "Solicitar acesso venoso periférico durante as compressões:",
-      marcado: false,
-    },
-    {
-      id: 4,
-      texto: "Abocath 18",
-      marcado: false,
-    },
-    {
-      id: 5,
-      texto: "Abocath 20",
-      marcado: false,
-    },
-    {
-      id: 6,
-      texto: "Torneirinha",
-      marcado: false,
-    },
-    {
-      id: 7,
-      texto:
-        "Realizar monitorização com eletrodos do desfibrilador enquanto são realizadas as compressões",
-      marcado: false,
-    },
-    {
-      id: 8,
-      texto:
-        "Após 5 ciclos de RCP, verificar o pulso e analisar o ritmo por máximo 10 segundos.",
-      marcado: false,
-    },
-    {
-      id: 9,
-      texto: "SE MANTÉM AUSÊNCIA DE PULSO",
-      marcado: false,
-    },
-    {
-      id: 10,
-      texto:
-        "Iniciar epinefrina 1 mg durante as compressões e repeti-la a cada 3-5 minutos",
-      marcado: false,
-    },
-    {
-      id: 11,
-      texto: "Falar em voz alta: administrar epinefrina 1 mg a cada 4 minutos",
-      marcado: false,
-    },
-  ]);
-
-  const idsApenasTexto = [2, 3, 9, 11];
-
-  const alternarItem = (id: number) => {
-    setItens((itensAtuais) =>
-      itensAtuais.map((item) =>
-        item.id === id ? { ...item, marcado: !item.marcado } : item,
-      ),
-    );
-  };
-
-  return (
-    <ScrollView style={{ flex: 1, padding: 16 }}>
-      {itens.map((item) => {
-        const semCheckbox = idsApenasTexto.includes(item.id);
-
-        return (
-          <CheckboxItem
-            key={item.id}
-            texto={item.texto}
-            marcado={item.marcado}
-            semCheckbox={semCheckbox}
-            onPress={() => alternarItem(item.id)}
-          />
-        );
-      })}
-    </ScrollView>
-  );
-};
-
-const InstrucoesCRoute = () => {
-  const [itens, setItens] = useState([
-    {
-      id: 1,
-      texto: "Falar em voz alta: preparando 1 mg de epinefrina",
-      marcado: false,
-    },
-    {
-      id: 2,
-      texto: "Aspirar adrenalina em uma seringa de 3ml",
-      marcado: false,
-    },
-    {
-      id: 3,
-      texto: "Aspirar 20 ml de soro fisiológico em uma seringa de 20 ml",
-      marcado: false,
-    },
-    {
-      id: 4,
-      texto: "Elevar membro",
-      marcado: false,
-    },
-    {
-      id: 5,
-      texto: "Solicitar via aérea avançada COM MÁSCARA DE LARÍNGEA ou IOT",
-      marcado: false,
-    },
-    {
-      id: 6,
-      texto: "Realizou com sucesso a via aérea avançada e Falar em voz alta:",
-      marcado: false,
-    },
-    {
-      id: 7,
-      texto: "VIA AÉREA AVANÇADA PRONTA",
-      marcado: false,
-    },
-    {
-      id: 8,
-      texto: "01 ventilação a cada 06 segundos",
-      marcado: false,
-    },
-    {
-      id: 9,
-      texto: "Manter fonte de oxigênio a 15 l/min",
-      marcado: false,
-    },
-    {
-      id: 10,
-      texto:
-        "SOLICITAR INÍCIO DE compressões contínuas por dois minutos e 01 ventilação a cada seis segundos",
-      marcado: false,
-    },
-    {
-      id: 11,
-      texto: "Chegar pulso e analisar o ritmo por no máximo 10 segundos.",
-      marcado: false,
-    },
-  ]);
-
-  const idsApenasTexto = [1, 2, 3, 6];
-
-  const alternarItem = (id: number) => {
-    setItens((itensAtuais) =>
-      itensAtuais.map((item) =>
-        item.id === id ? { ...item, marcado: !item.marcado } : item,
-      ),
-    );
-  };
-
-  return (
-    <ScrollView style={{ flex: 1, padding: 16 }}>
-      {itens.map((item) => {
-        const semCheckbox = idsApenasTexto.includes(item.id);
-
-        return (
-          <CheckboxItem
-            key={item.id}
-            texto={item.texto}
-            marcado={item.marcado}
-            semCheckbox={semCheckbox}
-            onPress={() => alternarItem(item.id)}
-          />
-        );
-      })}
-    </ScrollView>
-  );
-};
 
 const routes = [
   { key: "acoes", title: "Ações" },
@@ -428,11 +159,26 @@ export default function AespAssistolia() {
           />
         );
       case "primeira":
-        return <InstrucoesARoute />;
+        return (
+          <ChecklistRoute
+            itens={checklistAesp[0].itens}
+            idsApenasTexto={checklistAesp[0].idsApenasTexto}
+          />
+        );
       case "segunda":
-        return <InstrucoesBRoute />;
+        return (
+          <ChecklistRoute
+            itens={checklistAesp[1].itens}
+            idsApenasTexto={checklistAesp[1].idsApenasTexto}
+          />
+        );
       case "terceira":
-        return <InstrucoesCRoute />;
+        return (
+          <ChecklistRoute
+            itens={checklistAesp[2].itens}
+            idsApenasTexto={checklistAesp[2].idsApenasTexto}
+          />
+        );
       default:
         return null;
     }

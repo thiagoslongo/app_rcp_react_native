@@ -41,11 +41,11 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="instrucoes"
+        name="sobre"
         options={{
-          title: "INSTRUÇÕES",
+          title: "SOBRE",
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={22} name="question-circle" color={color} />
+            <FontAwesome size={28} name="info" color={color} />
           ),
         }}
       />

@@ -1,11 +1,10 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+import ModalEscolhaRitmo from "@/components/ModalEscolhaRitmo";
+import ModalGuiaRapido from "@/components/ModalGuiaRapido";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
   Image,
   ImageBackground,
-  Modal,
-  Pressable,
   StatusBar,
   StyleSheet,
   Text,
@@ -46,87 +45,22 @@ export default function HomeScreen() {
           >
             <Text style={styles.textoPrimario}>INICIAR SIMULAÇÃO DE RCP</Text>
           </TouchableOpacity>
-          <Modal
-            animationType="fade"
-            transparent={true}
+          <ModalEscolhaRitmo
             visible={modalEscolhaVisible}
-            onRequestClose={() => setModalEscolhaVisible(false)}
-          >
-            <View style={styles.modalEscolhaRitmo}>
-              <View style={styles.modalEscolhaContainer}>
-                <Text style={styles.textEscolhaRitmo}>Escolha o Ritmo</Text>
-                <Pressable
-                  style={styles.botaoEscolhaRitmo}
-                  onPress={() => {
-                    setModalEscolhaVisible(false);
-                    router.push("/(tabs)/fv-tvsp");
-                  }}
-                >
-                  <Text style={styles.textBotaoEscolhaRitmo}>FV / TVSP</Text>
-                </Pressable>
-                <Pressable
-                  style={styles.botaoEscolhaRitmo}
-                  onPress={() => {
-                    setModalEscolhaVisible(false);
-                    router.push("/(tabs)/aesp-assistolia");
-                  }}
-                >
-                  <Text style={styles.textBotaoEscolhaRitmo}>
-                    AESP / Assistolia
-                  </Text>
-                </Pressable>
-                <Pressable onPress={() => setModalEscolhaVisible(false)}>
-                  <Text style={styles.textFecharEscolha}>Fechar</Text>
-                </Pressable>
-              </View>
-            </View>
-          </Modal>
-
+            fechar={() => setModalEscolhaVisible(false)}
+          />
           <TouchableOpacity
             style={styles.botaoSecundario}
-            onPress={() => router.push("/(tabs)/instrucoes")}
+            onPress={() => setModalVisible(true)}
           >
             <Text style={styles.textoSecundario}>GUIA RÁPIDO DO APP</Text>
           </TouchableOpacity>
+          <ModalGuiaRapido
+            visible={modalVisible}
+            fechar={() => setModalVisible(false)}
+          />
         </View>
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={modalVisible}
-          onRequestClose={() => setModalVisible(false)}
-        >
-          <View style={styles.modalContainer}>
-            <Text style={styles.modalTitulo}>Sobre o Aplicativo</Text>
-            <Text style={styles.modalTexto}>
-              Desenvolvido por: Thiago Resmini Slongo
-            </Text>
-            <Text style={styles.modalTexto}>
-              Colaboradores do Projeto: Jhoanna Vitória, Luan Carlos, Eduardo de
-              Souza e Renato Scortegagna
-            </Text>
-            <Text style={styles.modalTexto}>Versão: 2.0.0</Text>
-            <Text style={styles.modalTexto}>
-              Este aplicativo foi criado para auxiliar os estudantes para a
-              prática de RCP.
-            </Text>
-            <Text style={styles.modalTexto}>
-              © 2026 - Todos os direitos reservados
-            </Text>
-            <Pressable
-              style={styles.botaoClose}
-              onPress={() => setModalVisible(false)}
-            >
-              <Text style={styles.textFechar}>Fechar</Text>
-            </Pressable>
-          </View>
-        </Modal>
       </SafeAreaView>
-      <TouchableOpacity
-        style={styles.infoButton}
-        onPress={() => setModalVisible(true)}
-      >
-        <FontAwesome name="info-circle" size={25} color={"#000000"} />
-      </TouchableOpacity>
     </ImageBackground>
   );
 }
@@ -175,6 +109,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
+  textFechar: {
+    textAlign: "center",
+    color: "white",
+  },
   botoesContainer: {
     gap: 12,
     marginTop: 32,
@@ -204,15 +142,6 @@ const styles = StyleSheet.create({
     marginTop: 30,
     height: 25,
     justifyContent: "center",
-  },
-  textFechar: {
-    textAlign: "center",
-    color: "white",
-  },
-  modalTexto: {
-    marginBottom: 8,
-    fontSize: 14,
-    color: "#000",
   },
   modalEscolhaRitmo: {
     flex: 1,

@@ -37,18 +37,22 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 16,
+    marginTop: 10,
   },
   checkbox: {
     marginHorizontal: 5,
     marginVertical: 10,
+    borderRadius: 4,
   },
   checkboxText: {
     flex: 1,
     marginLeft: 10,
+    marginTop: 5,
   },
   checkboxTextSemMargem: {
     flex: 1,
     paddingLeft: 40,
+    marginTop: 5,
   },
 });
 
