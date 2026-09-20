@@ -160,8 +160,8 @@ const routes = [
   { key: "segunda", title: "Acesso" },
   { key: "terceira", title: "Via Aérea" },
   { key: "quarta", title: "Desfibrilação" },
-  { key: "quinta", title: "Choque" },
-  { key: "sexta", title: "Choque" },
+  { key: "quinta", title: "Amiodarona" },
+  { key: "sexta", title: "Pós-RCP" },
 ];
 
 export default function FvTvsp() {
