@@ -24,7 +24,7 @@ export default function ModalEscolhaRitmo({ visible, fechar }: Props) {
             style={styles.botaoEscolhaRitmo}
             onPress={() => {
               fechar();
-              router.push("/(tabs)/fv-tvsp");
+              router.push("/fv-tvsp");
             }}
           >
             <Text style={styles.textBotaoEscolhaRitmo}>FV / TVSP</Text>
@@ -34,7 +34,7 @@ export default function ModalEscolhaRitmo({ visible, fechar }: Props) {
             style={styles.botaoEscolhaRitmo}
             onPress={() => {
               fechar();
-              router.push("/(tabs)/aesp-assistolia");
+              router.push("/aesp-assistolia");
             }}
           >
             <Text style={styles.textBotaoEscolhaRitmo}>AESP / Assistolia</Text>
