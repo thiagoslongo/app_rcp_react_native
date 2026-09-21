@@ -29,6 +29,7 @@ const AcoesRoute = ({
   onPressEpinefrina,
   onPressAmiodarona,
   onPressChoques,
+  lembreteVisivel,
 }: {
   cronometroAtivo: boolean;
   ciclos: number;
@@ -36,6 +37,7 @@ const AcoesRoute = ({
   onPressChoques: () => void;
   dosesEpinefrina: number;
   dosesAmiodarona: number;
+  lembreteVisivel: boolean;
   exibirTempoFormatado: () => string;
   onPressCompressao: () => void;
   onPressEpinefrina: () => void;
@@ -43,6 +45,19 @@ const AcoesRoute = ({
 }) => (
   <View style={{ flex: 1 }}>
     <ScrollView>
+      {lembreteVisivel && (
+        <View style={styles.cardLembrete}>
+          <MaterialCommunityIcons
+            name="information-outline"
+            size={24}
+            color="#000"
+          />
+          <Text style={styles.textoLembrete}>
+            Clique em "Compressão Torácica" para iniciar o cronômetro e a
+            contagem de ciclos
+          </Text>
+        </View>
+      )}
       <TouchableOpacity
         style={styles.cardContainer}
         onPress={onPressCompressao}
@@ -174,6 +189,7 @@ export default function FvTvsp() {
   const layout = useWindowDimensions();
   const [index, setIndex] = React.useState(0);
   const [modalCicloVisible, setModalCicloVisible] = useState(false);
+  const [lembreteVisivel, setLembreteVisivel] = useState(true);
 
   useEffect(() => {
     let intervalo: ReturnType<typeof setInterval>;
@@ -208,6 +224,7 @@ export default function FvTvsp() {
       case "acoes":
         return (
           <AcoesRoute
+            lembreteVisivel={lembreteVisivel}
             cronometroAtivo={cronometroAtivo}
             ciclos={ciclos}
             dosesEpinefrina={dosesEpinefrina}
@@ -215,7 +232,10 @@ export default function FvTvsp() {
             choques={choques}
             onPressChoques={() => setChoques(choques + 1)}
             exibirTempoFormatado={exibirTempoFormatado}
-            onPressCompressao={() => setCronometroAtivo(!cronometroAtivo)}
+            onPressCompressao={() => {
+              setCronometroAtivo(!cronometroAtivo);
+              setLembreteVisivel(false);
+            }}
             onPressEpinefrina={() => setDosesEpinefrina(dosesEpinefrina + 1)}
             onPressAmiodarona={() => setDosesAmiodarona(dosesAmiodarona + 1)}
           />
@@ -389,5 +409,19 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     marginTop: 10,
     overflow: "hidden",
+  },
+  cardLembrete: {
+    marginTop: 10,
+    marginHorizontal: 10,
+    backgroundColor: "#D0BCFF",
+    borderRadius: 20,
+    padding: 20,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  textoLembrete: {
+    flex: 1,
+    fontSize: 14,
   },
 });
