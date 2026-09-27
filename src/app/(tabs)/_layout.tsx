@@ -1,4 +1,4 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Tabs } from "expo-router";
 
 export default function TabLayout() {
@@ -18,7 +18,7 @@ export default function TabLayout() {
         options={{
           title: "HOME",
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="home" color={color} />
+            <MaterialCommunityIcons size={28} name="home" color={color} />
           ),
         }}
       />
@@ -27,7 +27,7 @@ export default function TabLayout() {
         options={{
           title: "FV / TVSP",
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="heart" color={color} />
+            <MaterialCommunityIcons size={28} name="heart" color={color} />
           ),
         }}
       />
@@ -36,7 +36,11 @@ export default function TabLayout() {
         options={{
           title: "AESP",
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="bolt" color={color} />
+            <MaterialCommunityIcons
+              size={28}
+              name="lightning-bolt"
+              color={color}
+            />
           ),
         }}
       />
@@ -45,7 +49,11 @@ export default function TabLayout() {
         options={{
           title: "SOBRE",
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="info" color={color} />
+            <MaterialCommunityIcons
+              size={28}
+              name="information-variant"
+              color={color}
+            />
           ),
         }}
       />

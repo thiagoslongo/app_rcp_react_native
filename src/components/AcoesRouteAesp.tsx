@@ -1,4 +1,3 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -35,7 +34,7 @@ const AcoesRoute = ({
     )}
     <TouchableOpacity style={styles.cardContainer} onPress={onPressCompressao}>
       <View>
-        <FontAwesome
+        <MaterialCommunityIcons
           name="heart"
           size={25}
           color={cronometroAtivo ? "green" : "#000000"}

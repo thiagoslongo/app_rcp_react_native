@@ -1,12 +1,11 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import {
-    Alert,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  Alert,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 const AcoesRoute = ({
@@ -54,7 +53,7 @@ const AcoesRoute = ({
         onPress={onPressCompressao}
       >
         <View>
-          <FontAwesome
+          <MaterialCommunityIcons
             name="heart"
             size={25}
             color={cronometroAtivo ? "green" : "#000000"}
