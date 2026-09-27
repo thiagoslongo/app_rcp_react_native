@@ -109,60 +109,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
-  textFechar: {
-    textAlign: "center",
-    color: "white",
-  },
   botoesContainer: {
     gap: 12,
     marginTop: 32,
-  },
-  infoButton: {
-    position: "absolute",
-    top: 50,
-    right: 20,
-  },
-  modalContainer: {
-    marginTop: 100,
-    marginHorizontal: 30,
-    backgroundColor: "rgba(255,255,255,0.9)",
-    borderRadius: 20,
-    padding: 20,
-  },
-  modalTitulo: {
-    color: "#000",
-    fontWeight: "bold",
-    marginTop: 10,
-    marginBottom: 20,
-    fontSize: 25,
-  },
-  botaoClose: {
-    borderRadius: 20,
-    backgroundColor: "#000",
-    marginTop: 30,
-    height: 25,
-    justifyContent: "center",
-  },
-  modalEscolhaRitmo: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.75)",
-    color: "white",
-  },
-  modalEscolhaContainer: {
-    backgroundColor: "#2D2343",
-    borderRadius: 20,
-    padding: 30,
-    width: "80%",
-    alignItems: "center",
-    gap: 12,
-    marginTop: -70,
-  },
-  textFecharEscolha: {
-    textAlign: "center",
-    fontWeight: "bold",
-    color: "#ffffff",
   },
   botaoEscolhaRitmo: {
     backgroundColor: "#ffffffd7",
@@ -172,16 +121,5 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     width: "100%",
     alignItems: "center",
-  },
-  textBotaoEscolhaRitmo: {
-    color: "#2D2343",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  textEscolhaRitmo: {
-    color: "white",
-    fontSize: 20,
-    marginBottom: 20,
-    fontWeight: "bold",
   },
 });
