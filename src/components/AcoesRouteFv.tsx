@@ -48,6 +48,7 @@ const AcoesRoute = ({
           </Text>
         </View>
       )}
+      {/* btn.compressao */}
       <TouchableOpacity
         style={styles.cardContainer}
         onPress={onPressCompressao}
@@ -75,6 +76,7 @@ const AcoesRoute = ({
           </View>
         </View>
       </TouchableOpacity>
+      {/* btn.ventilacoes */}
       <TouchableOpacity style={styles.cardContainer} disabled={true}>
         <View>
           <MaterialCommunityIcons
@@ -91,7 +93,12 @@ const AcoesRoute = ({
           <Text style={styles.descricaoGeral}>IOT: 10 Ventilações/minuto</Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.cardContainer} onPress={onPressChoques}>
+      {/* btn.desfibrilação */}
+      <TouchableOpacity
+        style={styles.cardContainer}
+        onPress={onPressChoques}
+        disabled={!cronometroAtivo}
+      >
         <View>
           <MaterialCommunityIcons
             name="lightning-bolt"
@@ -108,9 +115,11 @@ const AcoesRoute = ({
           <Text style={styles.onPressPadrao}>Choques Aplicados: {choques}</Text>
         </View>
       </TouchableOpacity>
+      {/* btn.epinefrina */}
       <TouchableOpacity
         style={styles.cardContainer}
         onPress={onPressEpinefrina}
+        disabled={!cronometroAtivo}
       >
         <View>
           <MaterialCommunityIcons name="medication" size={25} color="#000000" />
@@ -123,9 +132,11 @@ const AcoesRoute = ({
           <Text style={styles.onPressPadrao}>Doses: {dosesEpinefrina}</Text>
         </View>
       </TouchableOpacity>
+      {/* btn.amiodarona */}
       <TouchableOpacity
         style={styles.cardContainer}
         onPress={onPressAmiodarona}
+        disabled={!cronometroAtivo}
       >
         <View>
           <MaterialCommunityIcons name="medication" size={25} color="#000000" />
@@ -137,9 +148,11 @@ const AcoesRoute = ({
           <Text style={styles.onPressPadrao}>Doses: {dosesAmiodarona}</Text>
         </View>
       </TouchableOpacity>
+      {/* btn.relatório */}
       <TouchableOpacity
         style={styles.cardContainer}
         onPress={() => Alert.alert("Gerando relatório...")}
+        disabled={!cronometroAtivo}
       >
         <View>
           <MaterialCommunityIcons

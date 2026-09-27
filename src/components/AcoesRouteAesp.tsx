@@ -32,6 +32,7 @@ const AcoesRoute = ({
         </Text>
       </View>
     )}
+    {/* btn.compressao */}
     <TouchableOpacity style={styles.cardContainer} onPress={onPressCompressao}>
       <View>
         <MaterialCommunityIcons
@@ -51,6 +52,7 @@ const AcoesRoute = ({
         </View>
       </View>
     </TouchableOpacity>
+    {/* btn.ventilacoes */}
     <TouchableOpacity style={styles.cardContainer} disabled={true}>
       <View>
         <MaterialCommunityIcons
@@ -67,7 +69,12 @@ const AcoesRoute = ({
         <Text style={styles.descricaoGeral}>IOT: 10 Ventilações/minuto</Text>
       </View>
     </TouchableOpacity>
-    <TouchableOpacity style={styles.cardContainer} onPress={onPressEpinefrina}>
+    {/* btn.epinefrina */}
+    <TouchableOpacity
+      style={styles.cardContainer}
+      onPress={onPressEpinefrina}
+      disabled={!cronometroAtivo}
+    >
       <View>
         <MaterialCommunityIcons name="medication" size={25} color="#000" />
       </View>
@@ -79,9 +86,11 @@ const AcoesRoute = ({
         <Text style={styles.onPressPadrao}>Doses: {dosesEpinefrina}</Text>
       </View>
     </TouchableOpacity>
+    {/* btn.relatório */}
     <TouchableOpacity
       style={styles.cardContainer}
       onPress={() => Alert.alert("Gerando relatório...")}
+      disabled={!cronometroAtivo}
     >
       <View>
         <MaterialCommunityIcons
