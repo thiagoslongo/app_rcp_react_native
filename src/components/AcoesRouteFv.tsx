@@ -136,7 +136,7 @@ const AcoesRoute = ({
       <TouchableOpacity
         style={styles.cardContainer}
         onPress={onPressAmiodarona}
-        disabled={!cronometroAtivo}
+        disabled={!cronometroAtivo || dosesAmiodarona >= 2}
       >
         <View>
           <MaterialCommunityIcons name="medication" size={25} color="#000000" />
