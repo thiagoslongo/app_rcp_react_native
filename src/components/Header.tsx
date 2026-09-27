@@ -1,21 +1,31 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { StatusBar, StyleSheet, Text, View } from "react-native";
+import {
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 const Header = ({
   titulo,
   tempo,
   ciclos,
+  onPressVoltar,
 }: {
   titulo: string;
   tempo: string;
   ciclos: number;
+  onPressVoltar: () => void;
 }) => (
   <View style={styles.header}>
-    <MaterialCommunityIcons
-      name="arrow-left-circle"
-      size={25}
-      color={"rgba(255,255,255,0.9)"}
-    />
+    <TouchableOpacity onPress={onPressVoltar}>
+      <MaterialCommunityIcons
+        name="arrow-left-circle"
+        size={25}
+        color={"rgba(255,255,255,0.9)"}
+      />
+    </TouchableOpacity>
     <Text style={styles.headerText}>{titulo}</Text>
     <Text style={styles.headerText}>{tempo}</Text>
     <Text style={styles.headerText}>Ciclos: {ciclos}</Text>

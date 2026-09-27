@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import ModalCicloCompleto from "@/components/ModalCicloCompleto";
 import SimulacaoTabBar from "@/components/SimulacaoTabBar";
 import { checklistFvTvsp } from "@/data/checklistFvTvsp";
+import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, useWindowDimensions } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
@@ -62,6 +63,15 @@ export default function FvTvsp() {
   const limiteDoseAmiodarona = () => {
     if (dosesAmiodarona < 2) {
       setDosesAmiodarona(dosesAmiodarona + 1);
+    }
+  };
+
+  const voltarAba = () => {
+    if (index > 0) {
+      setIndex(0);
+    }
+    if (index === 0) {
+      router.back();
     }
   };
 
@@ -143,6 +153,7 @@ export default function FvTvsp() {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["bottom"]}>
         <Header
+          onPressVoltar={voltarAba}
           titulo="FV / TVSP"
           tempo={exibirTempoFormatado()}
           ciclos={ciclos}

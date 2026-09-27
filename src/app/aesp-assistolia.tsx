@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import ModalCicloCompleto from "@/components/ModalCicloCompleto";
 import SimulacaoTabBar from "@/components/SimulacaoTabBar";
 import { checklistAesp } from "@/data/checklistAesp";
+import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, useWindowDimensions } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
@@ -52,6 +53,15 @@ export default function AespAssistolia() {
     const seg = segundosCronometro % 60;
 
     return `${String(min).padStart(2, "0")}:${String(seg).padStart(2, "0")}`;
+  };
+
+  const voltarAba = () => {
+    if (index > 0) {
+      setIndex(0);
+    }
+    if (index === 0) {
+      router.back();
+    }
   };
 
   const renderScene = ({ route }: { route: { key: string } }) => {
@@ -104,6 +114,7 @@ export default function AespAssistolia() {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["bottom"]}>
         <Header
+          onPressVoltar={voltarAba}
           titulo="AESP / ASSISTO..."
           tempo={exibirTempoFormatado()}
           ciclos={ciclos}
