@@ -1,18 +1,11 @@
 import AcoesRoute from "@/components/AcoesRouteFv";
 import ChecklistRoute from "@/components/ChecklistRoute";
 import Header from "@/components/Header";
+import ModalCicloCompleto from "@/components/ModalCicloCompleto";
 import SimulacaoTabBar from "@/components/SimulacaoTabBar";
 import { checklistFvTvsp } from "@/data/checklistFvTvsp";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import React, { useEffect, useState } from "react";
-import {
-  Modal,
-  Pressable,
-  StyleSheet,
-  Text,
-  useWindowDimensions,
-  View,
-} from "react-native";
+import { StyleSheet, useWindowDimensions } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { TabView } from "react-native-tab-view";
 
@@ -149,28 +142,10 @@ export default function FvTvsp() {
           renderScene={renderScene}
           renderTabBar={(props) => <SimulacaoTabBar {...props} scrollable />}
         />
-        <Modal
+        <ModalCicloCompleto
           visible={modalCicloVisible}
-          transparent={true}
-          animationType="fade"
-        >
-          <View style={styles.modalEscolhaRitmo}>
-            <View style={styles.modalEscolhaContainer}>
-              <MaterialCommunityIcons
-                name="alert-circle"
-                size={50}
-                color="#D0BCFF"
-              />
-              <Text style={styles.textEscolhaRitmo}>Ciclo Completo!</Text>
-              <Text style={{ color: "white", textAlign: "center" }}>
-                Considere alternar o socorrista e verificar o ritmo.
-              </Text>
-              <Pressable onPress={() => setModalCicloVisible(false)}>
-                <Text style={styles.textFecharEscolha}>Entendi</Text>
-              </Pressable>
-            </View>
-          </View>
-        </Modal>
+          clickExibirCiclo={() => setModalCicloVisible(false)}
+        />
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -179,35 +154,5 @@ export default function FvTvsp() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  scrollView: {},
-  modalEscolhaRitmo: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.69)",
-  },
-  modalEscolhaContainer: {
-    backgroundColor: "#2D2343",
-    borderRadius: 20,
-    padding: 30,
-    width: "80%",
-    alignItems: "center",
-    gap: 12,
-  },
-  textEscolhaRitmo: {
-    color: "white",
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  textFecharEscolha: {
-    color: "white",
-    fontWeight: "bold",
-    backgroundColor: "#000",
-    borderRadius: 20,
-    paddingHorizontal: 30,
-    paddingVertical: 8,
-    marginTop: 10,
-    overflow: "hidden",
   },
 });
