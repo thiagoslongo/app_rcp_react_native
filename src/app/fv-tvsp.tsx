@@ -1,6 +1,7 @@
 import AcoesRoute from "@/components/AcoesRouteFv";
 import ChecklistRoute from "@/components/ChecklistRoute";
 import Header from "@/components/Header";
+import SimulacaoTabBar from "@/components/SimulacaoTabBar";
 import { checklistFvTvsp } from "@/data/checklistFvTvsp";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import React, { useEffect, useState } from "react";
@@ -13,7 +14,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { TabBar, TabView } from "react-native-tab-view";
+import { TabView } from "react-native-tab-view";
 
 const routes = [
   { key: "acoes", title: "Ações" },
@@ -133,19 +134,6 @@ export default function FvTvsp() {
     }
   };
 
-  const renderTabBar = (props: any) => (
-    <TabBar
-      {...props}
-      style={{ backgroundColor: "#2D2343" }}
-      indicatorStyle={{ backgroundColor: "#D0BCFF" }}
-      labelStyle={{ fontSize: 10, fontWeight: "bold" }}
-      activeColor="#ffffff"
-      inactiveColor="rgba(255,255,255,0.6)"
-      scrollEnabled={true}
-      tabStyle={{ width: "auto" }}
-    />
-  );
-
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["bottom"]}>
@@ -159,7 +147,7 @@ export default function FvTvsp() {
           navigationState={{ index, routes }}
           onIndexChange={setIndex}
           renderScene={renderScene}
-          renderTabBar={renderTabBar}
+          renderTabBar={(props) => <SimulacaoTabBar {...props} scrollable />}
         />
         <Modal
           visible={modalCicloVisible}

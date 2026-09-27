@@ -1,6 +1,7 @@
 import AcoesRoute from "@/components/AcoesRouteAesp";
 import ChecklistRoute from "@/components/ChecklistRoute";
 import Header from "@/components/Header";
+import SimulacaoTabBar from "@/components/SimulacaoTabBar";
 import { checklistAesp } from "@/data/checklistAesp";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import React, { useEffect, useState } from "react";
@@ -13,7 +14,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { TabBar, TabView } from "react-native-tab-view";
+import { TabView } from "react-native-tab-view";
 
 const routes = [
   { key: "acoes", title: "Ações" },
@@ -103,17 +104,6 @@ export default function AespAssistolia() {
     }
   };
 
-  const renderTabBar = (props: any) => (
-    <TabBar
-      {...props}
-      style={{ backgroundColor: "#2D2343" }}
-      indicatorStyle={{ backgroundColor: "#D0BCFF" }}
-      labelStyle={{ fontSize: 10, fontWeight: "bold" }}
-      activeColor="#fff"
-      inactiveColor="rgba(255,255,255,0.6)"
-    />
-  );
-
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={["bottom"]}>
@@ -127,7 +117,7 @@ export default function AespAssistolia() {
           navigationState={{ index, routes }}
           onIndexChange={setIndex}
           renderScene={renderScene}
-          renderTabBar={renderTabBar}
+          renderTabBar={(props) => <SimulacaoTabBar {...props} />}
         />
         <Modal
           visible={modalCicloVisible}
