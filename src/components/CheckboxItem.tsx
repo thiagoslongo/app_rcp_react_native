@@ -6,10 +6,12 @@ const CheckboxItem = ({
   marcado,
   semCheckbox,
   onPress,
+  disabled,
 }: {
   texto: string;
   marcado: boolean;
   semCheckbox: boolean;
+  disabled: boolean;
   onPress: () => void;
 }) => (
   <View style={styles.checkboxContainer}>
@@ -19,6 +21,7 @@ const CheckboxItem = ({
         value={marcado}
         onValueChange={onPress}
         color={marcado ? "green" : undefined}
+        disabled={disabled}
       />
     )}
     <Text

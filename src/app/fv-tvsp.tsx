@@ -85,6 +85,7 @@ export default function FvTvsp() {
           <ChecklistRoute
             itens={checklistFvTvsp[0].itens}
             idsApenasTexto={checklistFvTvsp[0].idsApenasTexto}
+            cronometroAtivo={cronometroAtivo}
           />
         );
       case "segunda":
@@ -92,6 +93,7 @@ export default function FvTvsp() {
           <ChecklistRoute
             itens={checklistFvTvsp[1].itens}
             idsApenasTexto={checklistFvTvsp[1].idsApenasTexto}
+            cronometroAtivo={cronometroAtivo}
           />
         );
       case "terceira":
@@ -99,6 +101,7 @@ export default function FvTvsp() {
           <ChecklistRoute
             itens={checklistFvTvsp[2].itens}
             idsApenasTexto={checklistFvTvsp[2].idsApenasTexto}
+            cronometroAtivo={cronometroAtivo}
           />
         );
       case "quarta":
@@ -106,6 +109,7 @@ export default function FvTvsp() {
           <ChecklistRoute
             itens={checklistFvTvsp[3].itens}
             idsApenasTexto={checklistFvTvsp[3].idsApenasTexto}
+            cronometroAtivo={cronometroAtivo}
           />
         );
       case "quinta":
@@ -113,6 +117,7 @@ export default function FvTvsp() {
           <ChecklistRoute
             itens={checklistFvTvsp[4].itens}
             idsApenasTexto={checklistFvTvsp[4].idsApenasTexto}
+            cronometroAtivo={cronometroAtivo}
           />
         );
       case "sexta":
@@ -120,6 +125,7 @@ export default function FvTvsp() {
           <ChecklistRoute
             itens={checklistFvTvsp[5].itens}
             idsApenasTexto={checklistFvTvsp[5].idsApenasTexto}
+            cronometroAtivo={cronometroAtivo}
           />
         );
       default:

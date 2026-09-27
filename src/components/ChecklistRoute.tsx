@@ -9,9 +9,10 @@ type Props = {
     marcado: boolean;
   }[];
   idsApenasTexto: number[];
+  cronometroAtivo: boolean;
 };
 
-const ChecklistRoute = ({ itens, idsApenasTexto }: Props) => {
+const ChecklistRoute = ({ itens, idsApenasTexto, cronometroAtivo }: Props) => {
   const [itensState, setItensState] = useState(itens);
 
   const alternarItem = (id: number) => {
@@ -34,6 +35,7 @@ const ChecklistRoute = ({ itens, idsApenasTexto }: Props) => {
             marcado={item.marcado}
             semCheckbox={semCheckbox}
             onPress={() => alternarItem(item.id)}
+            disabled={!cronometroAtivo}
           />
         );
       })}

@@ -76,6 +76,7 @@ export default function AespAssistolia() {
           <ChecklistRoute
             itens={checklistAesp[0].itens}
             idsApenasTexto={checklistAesp[0].idsApenasTexto}
+            cronometroAtivo={cronometroAtivo}
           />
         );
       case "segunda":
@@ -83,6 +84,7 @@ export default function AespAssistolia() {
           <ChecklistRoute
             itens={checklistAesp[1].itens}
             idsApenasTexto={checklistAesp[1].idsApenasTexto}
+            cronometroAtivo={cronometroAtivo}
           />
         );
       case "terceira":
@@ -90,6 +92,7 @@ export default function AespAssistolia() {
           <ChecklistRoute
             itens={checklistAesp[2].itens}
             idsApenasTexto={checklistAesp[2].idsApenasTexto}
+            cronometroAtivo={cronometroAtivo}
           />
         );
       default:
