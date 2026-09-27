@@ -59,6 +59,12 @@ export default function FvTvsp() {
     return `${String(min).padStart(2, "0")}:${String(seg).padStart(2, "0")}`;
   };
 
+  const limiteDoseAmiodarona = () => {
+    if (dosesAmiodarona < 2) {
+      setDosesAmiodarona(dosesAmiodarona + 1);
+    }
+  };
+
   const renderScene = ({ route }: { route: { key: string } }) => {
     switch (route.key) {
       case "acoes":
@@ -77,7 +83,7 @@ export default function FvTvsp() {
               setLembreteVisivel(false);
             }}
             onPressEpinefrina={() => setDosesEpinefrina(dosesEpinefrina + 1)}
-            onPressAmiodarona={() => setDosesAmiodarona(dosesAmiodarona + 1)}
+            onPressAmiodarona={limiteDoseAmiodarona}
           />
         );
       case "primeira":
