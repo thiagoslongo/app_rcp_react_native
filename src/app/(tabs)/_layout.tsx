@@ -45,6 +45,19 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="relatorios"
+        options={{
+          title: "RELATÓRIOS",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              size={28}
+              name="file-document"
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="sobre"
         options={{
           title: "SOBRE",
