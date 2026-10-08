@@ -1,5 +1,5 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const AcoesRoute = ({
   cronometroAtivo,
@@ -9,6 +9,7 @@ const AcoesRoute = ({
   onPressCompressao,
   onPressEpinefrina,
   lembreteVisivel,
+  onPressRelatorio,
 }: {
   cronometroAtivo: boolean;
   ciclos: number;
@@ -17,6 +18,7 @@ const AcoesRoute = ({
   exibirTempoFormatado: () => string;
   onPressCompressao: () => void;
   onPressEpinefrina: () => void;
+  onPressRelatorio: () => void;
 }) => (
   <View style={{ flex: 1 }}>
     {lembreteVisivel && (
@@ -89,7 +91,7 @@ const AcoesRoute = ({
     {/* btn.relatório */}
     <TouchableOpacity
       style={styles.cardContainer}
-      onPress={() => Alert.alert("Gerando relatório...")}
+      onPress={onPressRelatorio}
       disabled={!cronometroAtivo}
     >
       <View>

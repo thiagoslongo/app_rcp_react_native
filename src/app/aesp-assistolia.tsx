@@ -2,6 +2,7 @@ import AcoesRoute from "@/components/AcoesRouteAesp";
 import ChecklistRoute from "@/components/ChecklistRoute";
 import Header from "@/components/Header";
 import ModalCicloCompleto from "@/components/ModalCicloCompleto";
+import RelatorioCard from "@/components/RelatorioCard";
 import SimulacaoTabBar from "@/components/SimulacaoTabBar";
 import { checklistAesp } from "@/data/checklistAesp";
 import { router } from "expo-router";
@@ -25,6 +26,7 @@ export default function AespAssistolia() {
   const layout = useWindowDimensions();
   const [index, setIndex] = React.useState(0);
   const [modalCicloVisible, setModalCicloVisible] = useState(false);
+  const [modalRelatorioVisible, setModalRelatorioVisible] = useState(false);
   const [lembreteVisivel, setLembreteVisivel] = useState(true);
 
   useEffect(() => {
@@ -74,6 +76,10 @@ export default function AespAssistolia() {
             ciclos={ciclos}
             dosesEpinefrina={dosesEpinefrina}
             exibirTempoFormatado={exibirTempoFormatado}
+            onPressRelatorio={() => {
+              setModalRelatorioVisible(true);
+              setCronometroAtivo(false);
+            }}
             onPressCompressao={() => {
               setCronometroAtivo(!cronometroAtivo);
               setLembreteVisivel(false);
@@ -129,6 +135,17 @@ export default function AespAssistolia() {
         <ModalCicloCompleto
           visible={modalCicloVisible}
           clickExibirCiclo={() => setModalCicloVisible(false)}
+        />
+        <RelatorioCard
+          visible={modalRelatorioVisible}
+          onFechar={() => {
+            setModalRelatorioVisible(false);
+            setCronometroAtivo(false);
+          }}
+          tempoTotal={exibirTempoFormatado()}
+          ciclos={ciclos}
+          dosesEpinefrina={dosesEpinefrina}
+          tipoRitmo="AESP"
         />
       </SafeAreaView>
     </SafeAreaProvider>

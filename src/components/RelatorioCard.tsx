@@ -23,12 +23,17 @@ const RelatorioCard = ({
 }: RelatorioCardProps) => (
   <Modal visible={visible}>
     <View style={styles.modalContainer}>
-      <Text>Relatório de Atendimento</Text>
-      <Text>Tempo Total={tempoTotal} </Text>
-      <Text>Ciclos Completos={ciclos} </Text>
-      <Text>Doses={dosesAmiodarona} </Text>
+      <Text style={styles.textTitulo}>Relatório de Atendimento:</Text>
+    </View>
+    <View style={styles.modalContainer}>
+      <Text>Ritmo: {tipoRitmo}</Text>
+      <Text>Tempo Total: {tempoTotal} </Text>
+      <Text>Ciclos Completos: {ciclos} </Text>
+      <Text>Epinefrina: {dosesEpinefrina}</Text>
+      {dosesAmiodarona && <Text>Amiodarona: {dosesAmiodarona}</Text>}
+      {choques && <Text>Choques: {choques}</Text>}
       <Pressable onPress={onFechar}>
-        <Text>Fechar!</Text>
+        <Text style={styles.textFechar}>Fechar Relatório</Text>
       </Pressable>
     </View>
   </Modal>
@@ -36,12 +41,25 @@ const RelatorioCard = ({
 
 const styles = StyleSheet.create({
   modalContainer: {
-    backgroundColor: "#2D2343",
-    borderRadius: 20,
+    flex: 1,
     padding: 30,
-    width: "80%",
-    alignItems: "center",
     gap: 12,
+    backgroundColor: "#D0BCFF",
+  },
+  textTitulo: {
+    fontWeight: "bold",
+    fontSize: 22,
+  },
+  textFechar: {
+    color: "white",
+    fontWeight: "bold",
+    backgroundColor: "#000",
+    borderRadius: 20,
+    paddingHorizontal: 30,
+    paddingVertical: 8,
+    marginTop: 10,
+    overflow: "hidden",
+    width: "80%",
   },
 });
 
