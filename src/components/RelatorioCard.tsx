@@ -1,4 +1,12 @@
-import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Modal,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 interface RelatorioCardProps {
   tempoTotal: string;
@@ -8,6 +16,7 @@ interface RelatorioCardProps {
   dosesAmiodarona?: number;
   choques?: number;
   visible: boolean;
+  // marcado: boolean;
   onFechar: () => void;
 }
 
@@ -20,46 +29,105 @@ const RelatorioCard = ({
   dosesAmiodarona,
   tipoRitmo,
   choques,
+  // marcado,
 }: RelatorioCardProps) => (
   <Modal visible={visible}>
-    <View style={styles.modalContainer}>
-      <Text style={styles.textTitulo}>Relatório de Atendimento:</Text>
-    </View>
-    <View style={styles.modalContainer}>
-      <Text>Ritmo: {tipoRitmo}</Text>
-      <Text>Tempo Total: {tempoTotal} </Text>
-      <Text>Ciclos Completos: {ciclos} </Text>
-      <Text>Epinefrina: {dosesEpinefrina}</Text>
-      {dosesAmiodarona && <Text>Amiodarona: {dosesAmiodarona}</Text>}
-      {choques && <Text>Choques: {choques}</Text>}
-      <Pressable onPress={onFechar}>
-        <Text style={styles.textFechar}>Fechar Relatório</Text>
-      </Pressable>
-    </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#F9F9F9" }}>
+      <View style={styles.modalContainer}>
+        <View style={styles.modalHeader}>
+          <Text style={styles.textTitulo}>Relatório de Atendimento</Text>
+        </View>
+        <View style={styles.modalBotao}>
+          <ScrollView>
+            <Text style={styles.textoRitmo}>
+              <Text style={{ fontWeight: "bold" }}>Ritmo: </Text>
+              {tipoRitmo}
+            </Text>
+            <Text style={styles.textoConteudo}>
+              <Text style={{ fontWeight: "bold" }}>Tempo Total: </Text>
+              {tempoTotal}
+            </Text>
+            <Text style={styles.textoConteudo}>
+              <Text style={{ fontWeight: "bold" }}>Ciclos Completos: </Text>
+              {ciclos}
+            </Text>
+            <Text style={styles.textoConteudo}>
+              <Text style={{ fontWeight: "bold" }}>Epinefrina: </Text>
+              {dosesEpinefrina}
+            </Text>
+            {dosesAmiodarona && (
+              <Text style={styles.textoConteudo}>
+                <Text style={{ fontWeight: "bold" }}>Amiodarona: </Text>
+                {dosesAmiodarona}
+              </Text>
+            )}
+            {choques && (
+              <Text style={styles.textoConteudo}>
+                <Text style={{ fontWeight: "bold" }}>Choques: </Text>
+                {choques}
+              </Text>
+            )}
+          </ScrollView>
+        </View>
+        <View style={styles.estruturaBotao}>
+          <Pressable style={styles.botao} onPress={onFechar}>
+            <Text style={styles.botaoTexto}>Fechar Relatório</Text>
+          </Pressable>
+          <Pressable style={styles.botao}>
+            <Text style={styles.botaoTexto}>Compartilhar</Text>
+          </Pressable>
+        </View>
+      </View>
+    </SafeAreaView>
   </Modal>
 );
 
 const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
-    padding: 30,
+    padding: 20,
     gap: 12,
-    backgroundColor: "#D0BCFF",
   },
   textTitulo: {
-    fontWeight: "bold",
-    fontSize: 22,
-  },
-  textFechar: {
+    fontWeight: "600",
+    fontSize: 20,
     color: "white",
-    fontWeight: "bold",
-    backgroundColor: "#000",
+    textAlign: "center",
+  },
+  modalHeader: {
+    padding: 5,
+    backgroundColor: "#2D2343",
+    borderRadius: 9,
+  },
+  textoRitmo: {
+    fontSize: 26,
+    marginBottom: 10,
+  },
+  textoConteudo: {
+    fontSize: 20,
+    marginBottom: 10,
+  },
+  modalBotao: {
+    flex: 1,
+  },
+  botao: {
+    backgroundColor: "#2D2343",
     borderRadius: 20,
     paddingHorizontal: 30,
-    paddingVertical: 8,
+    paddingVertical: 12,
     marginTop: 10,
     overflow: "hidden",
-    width: "80%",
+    flex: 1,
+  },
+  botaoTexto: {
+    color: "white",
+    textAlign: "center",
+    fontWeight: "600",
+  },
+  estruturaBotao: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 10,
   },
 });
 

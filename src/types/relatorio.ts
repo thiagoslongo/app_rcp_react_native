@@ -12,5 +12,5 @@ export type ItemRelatorio = {
 
 export type EventoSimulacao = {
   tipo: "epinefrina" | "amiodarona" | "choque";
-  timeStamp: string;
+  timeStamp: number;
 };

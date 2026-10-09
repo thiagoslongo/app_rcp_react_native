@@ -50,9 +50,9 @@ export default function AespAssistolia() {
     return () => clearInterval(intervalo);
   }, [cronometroAtivo]);
 
-  const exibirTempoFormatado = () => {
-    const min = Math.floor(segundosCronometro / 60);
-    const seg = segundosCronometro % 60;
+  const exibirTempoFormatado = (totalSegundos: number) => {
+    const min = Math.floor(totalSegundos / 60);
+    const seg = totalSegundos % 60;
 
     return `${String(min).padStart(2, "0")}:${String(seg).padStart(2, "0")}`;
   };
@@ -75,6 +75,7 @@ export default function AespAssistolia() {
             cronometroAtivo={cronometroAtivo}
             ciclos={ciclos}
             dosesEpinefrina={dosesEpinefrina}
+            tempoSegundos={segundosCronometro}
             exibirTempoFormatado={exibirTempoFormatado}
             onPressRelatorio={() => {
               setModalRelatorioVisible(true);
@@ -122,7 +123,7 @@ export default function AespAssistolia() {
         <Header
           onPressVoltar={voltarAba}
           titulo="AESP / ASSISTO..."
-          tempo={exibirTempoFormatado()}
+          tempo={exibirTempoFormatado(segundosCronometro)}
           ciclos={ciclos}
         />
         <TabView
@@ -142,7 +143,7 @@ export default function AespAssistolia() {
             setModalRelatorioVisible(false);
             setCronometroAtivo(false);
           }}
-          tempoTotal={exibirTempoFormatado()}
+          tempoTotal={exibirTempoFormatado(segundosCronometro)}
           ciclos={ciclos}
           dosesEpinefrina={dosesEpinefrina}
           tipoRitmo="AESP"

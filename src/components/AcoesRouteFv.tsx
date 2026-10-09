@@ -20,6 +20,7 @@ const AcoesRoute = ({
   onPressAmiodarona,
   onPressChoques,
   lembreteVisivel,
+  tempoSegundos,
 }: {
   cronometroAtivo: boolean;
   ciclos: number;
@@ -28,7 +29,8 @@ const AcoesRoute = ({
   dosesEpinefrina: number;
   dosesAmiodarona: number;
   lembreteVisivel: boolean;
-  exibirTempoFormatado: () => string;
+  tempoSegundos: number;
+  exibirTempoFormatado: (segundos: number) => string;
   onPressCompressao: () => void;
   onPressEpinefrina: () => void;
   onPressAmiodarona: () => void;
@@ -70,7 +72,7 @@ const AcoesRoute = ({
           >
             <Text style={styles.cronometroStyle}>
               {" "}
-              {exibirTempoFormatado()}
+              {exibirTempoFormatado(tempoSegundos)}
             </Text>
             <Text style={styles.ciclosStyele}>Ciclos: {ciclos}</Text>
           </View>
