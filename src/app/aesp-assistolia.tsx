@@ -5,6 +5,8 @@ import ModalCicloCompleto from "@/components/ModalCicloCompleto";
 import RelatorioCard from "@/components/RelatorioCard";
 import SimulacaoTabBar from "@/components/SimulacaoTabBar";
 import { checklistAesp } from "@/data/checklistAesp";
+import { EventoSimulacao } from "@/types/relatorio";
+import { exibirTempoFormatado } from "@/utils/formatarTempo";
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, useWindowDimensions } from "react-native";
@@ -28,6 +30,9 @@ export default function AespAssistolia() {
   const [modalCicloVisible, setModalCicloVisible] = useState(false);
   const [modalRelatorioVisible, setModalRelatorioVisible] = useState(false);
   const [lembreteVisivel, setLembreteVisivel] = useState(true);
+  const [registroEventosClique, setRegistroEventosClique] = useState<
+    EventoSimulacao[]
+  >([]);
 
   useEffect(() => {
     let intervalo: ReturnType<typeof setInterval>;
@@ -49,13 +54,6 @@ export default function AespAssistolia() {
 
     return () => clearInterval(intervalo);
   }, [cronometroAtivo]);
-
-  const exibirTempoFormatado = (totalSegundos: number) => {
-    const min = Math.floor(totalSegundos / 60);
-    const seg = totalSegundos % 60;
-
-    return `${String(min).padStart(2, "0")}:${String(seg).padStart(2, "0")}`;
-  };
 
   const voltarAba = () => {
     if (index > 0) {
@@ -85,7 +83,13 @@ export default function AespAssistolia() {
               setCronometroAtivo(!cronometroAtivo);
               setLembreteVisivel(false);
             }}
-            onPressEpinefrina={() => setDosesEpinefrina(dosesEpinefrina + 1)}
+            onPressEpinefrina={() => {
+              setDosesEpinefrina(dosesEpinefrina + 1);
+              setRegistroEventosClique([
+                ...registroEventosClique,
+                { tipo: "epinefrina", timeStamp: segundosCronometro },
+              ]);
+            }}
           />
         );
       case "primeira":
@@ -147,6 +151,7 @@ export default function AespAssistolia() {
           ciclos={ciclos}
           dosesEpinefrina={dosesEpinefrina}
           tipoRitmo="AESP"
+          eventos={registroEventosClique}
         />
       </SafeAreaView>
     </SafeAreaProvider>

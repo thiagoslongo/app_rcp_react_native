@@ -1,3 +1,5 @@
+import { EventoSimulacao } from "@/types/relatorio";
+import { exibirTempoFormatado } from "@/utils/formatarTempo";
 import {
   Modal,
   Pressable,
@@ -6,7 +8,7 @@ import {
   Text,
   View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 interface RelatorioCardProps {
   tempoTotal: string;
@@ -16,7 +18,7 @@ interface RelatorioCardProps {
   dosesAmiodarona?: number;
   choques?: number;
   visible: boolean;
-  // marcado: boolean;
+  eventos: EventoSimulacao[];
   onFechar: () => void;
 }
 
@@ -29,56 +31,63 @@ const RelatorioCard = ({
   dosesAmiodarona,
   tipoRitmo,
   choques,
-  // marcado,
+  eventos,
 }: RelatorioCardProps) => (
   <Modal visible={visible}>
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#F9F9F9" }}>
-      <View style={styles.modalContainer}>
-        <View style={styles.modalHeader}>
-          <Text style={styles.textTitulo}>Relatório de Atendimento</Text>
-        </View>
-        <View style={styles.modalBotao}>
-          <ScrollView>
-            <Text style={styles.textoRitmo}>
-              <Text style={{ fontWeight: "bold" }}>Ritmo: </Text>
-              {tipoRitmo}
-            </Text>
-            <Text style={styles.textoConteudo}>
-              <Text style={{ fontWeight: "bold" }}>Tempo Total: </Text>
-              {tempoTotal}
-            </Text>
-            <Text style={styles.textoConteudo}>
-              <Text style={{ fontWeight: "bold" }}>Ciclos Completos: </Text>
-              {ciclos}
-            </Text>
-            <Text style={styles.textoConteudo}>
-              <Text style={{ fontWeight: "bold" }}>Epinefrina: </Text>
-              {dosesEpinefrina}
-            </Text>
-            {dosesAmiodarona && (
-              <Text style={styles.textoConteudo}>
-                <Text style={{ fontWeight: "bold" }}>Amiodarona: </Text>
-                {dosesAmiodarona}
+    <SafeAreaProvider>
+      <SafeAreaView style={{ flex: 1, backgroundColor: "#F9F9F9" }}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalHeader}>
+            <Text style={styles.textTitulo}>Relatório de Atendimento</Text>
+          </View>
+          <View style={styles.modalBotao}>
+            <ScrollView>
+              <Text style={styles.textoRitmo}>
+                <Text style={{ fontWeight: "bold" }}>Ritmo: </Text>
+                {tipoRitmo}
               </Text>
-            )}
-            {choques && (
               <Text style={styles.textoConteudo}>
-                <Text style={{ fontWeight: "bold" }}>Choques: </Text>
-                {choques}
+                <Text style={{ fontWeight: "bold" }}>Tempo Total: </Text>
+                {tempoTotal}
               </Text>
-            )}
-          </ScrollView>
+              <Text style={styles.textoConteudo}>
+                <Text style={{ fontWeight: "bold" }}>Ciclos Completos: </Text>
+                {ciclos}
+              </Text>
+              <Text style={styles.textoConteudo}>
+                <Text style={{ fontWeight: "bold" }}>Epinefrina: </Text>
+                {dosesEpinefrina}
+              </Text>
+              {dosesAmiodarona && (
+                <Text style={styles.textoConteudo}>
+                  <Text style={{ fontWeight: "bold" }}>Amiodarona: </Text>
+                  {dosesAmiodarona}
+                </Text>
+              )}
+              {choques && (
+                <Text style={styles.textoConteudo}>
+                  <Text style={{ fontWeight: "bold" }}>Choques: </Text>
+                  {choques}
+                </Text>
+              )}
+              {eventos.map((evento, posicao) => (
+                <Text key={posicao}>
+                  {exibirTempoFormatado(evento.timeStamp)} - {evento.tipo}
+                </Text>
+              ))}
+            </ScrollView>
+          </View>
+          <View style={styles.estruturaBotao}>
+            <Pressable style={styles.botao} onPress={onFechar}>
+              <Text style={styles.botaoTexto}>Fechar Relatório</Text>
+            </Pressable>
+            <Pressable style={styles.botao}>
+              <Text style={styles.botaoTexto}>Compartilhar</Text>
+            </Pressable>
+          </View>
         </View>
-        <View style={styles.estruturaBotao}>
-          <Pressable style={styles.botao} onPress={onFechar}>
-            <Text style={styles.botaoTexto}>Fechar Relatório</Text>
-          </Pressable>
-          <Pressable style={styles.botao}>
-            <Text style={styles.botaoTexto}>Compartilhar</Text>
-          </Pressable>
-        </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </SafeAreaProvider>
   </Modal>
 );
 
