@@ -11,6 +11,7 @@ export type ItemRelatorio = {
 };
 
 export type EventoSimulacao = {
-  tipo: "epinefrina" | "amiodarona" | "choque";
+  tipo: "epinefrina" | "amiodarona" | "choque" | "checkbox";
   timeStamp: number;
+  textoCheckbox?: string;
 };
